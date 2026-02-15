@@ -29,6 +29,34 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Environment Variables
+
+Este proyecto requiere variables de entorno para funcionar correctamente.
+
+### Setup local
+
+1. Crea un archivo `.env.local` en la raíz del proyecto
+2. Agrega las siguientes variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=<tu_url_supabase>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<tu_anon_key>
+```
+
+3. Obtén estas credenciales de tu proyecto en [Supabase](https://supabase.com)
+
+**⚠️ IMPORTANTE:** El archivo `.env.local` no debe ser subido a GitHub. Está incluido en `.gitignore` por seguridad.
+
+### Deploy en Vercel
+
+Para desplegar en Vercel:
+
+1. Conecta tu repositorio a Vercel
+2. Ve a **Settings → Environment Variables**
+3. Agrega las mismas variables de entorno:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
