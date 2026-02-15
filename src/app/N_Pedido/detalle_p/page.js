@@ -10,26 +10,34 @@ import { Button } from "@/components/ui/button";
 import { Trash2, ArrowLeft } from "lucide-react";
 import supabase from "@/utils/supabase/client";
 
-export default function DetallePedidoPage() {
+function DetallePedidoContent() {
   const [pedido, setPedido] = useState({
     mesa: "",
     items: [],
     nota: "",
   });
   const [usuarioId, setUsuarioId] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
   const params = useSearchParams();
   const mesaParam = params.get("mesa");
 
+  /* ✅ Verificar que estamos en el cliente */
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   /* 🔐 Obtener ID del usuario logueado */
   useEffect(() => {
+    if (!isClient) return;
     const idDelSessionStorage = sessionStorage.getItem("idUsuario");
     setUsuarioId(idDelSessionStorage ? Number(idDelSessionStorage) : 1);
-  }, []);
+  }, [isClient]);
 
   /* 🔹 Cargar pedido */
   useEffect(() => {
+    if (!isClient) return;
     const pedidoGuardado = JSON.parse(
       sessionStorage.getItem("pedidoActual")
     );
@@ -47,7 +55,7 @@ export default function DetallePedidoPage() {
         nota: "",
       });
     }
-  }, [mesaParam]);
+  }, [mesaParam, isClient]);
 
   /* ❌ Eliminar item */
   const handleEliminar = (index) => {
@@ -419,4 +427,8 @@ export default function DetallePedidoPage() {
       </main>
     </div>
   );
+}
+
+export default function DetallePedidoPage() {
+  return <DetallePedidoContent />;
 }

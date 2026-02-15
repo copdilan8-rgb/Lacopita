@@ -25,7 +25,7 @@ const CATEGORIES = [
   { id: 9, path: "promos_M", label: "🎉 Promos" },
 ];
 
-export default function MenuPage() {
+function MenuContent() {
   const router = useRouter();
   const params = useSearchParams();
   const mesaParam = params.get("mesa");
@@ -201,4 +201,8 @@ export default function MenuPage() {
       </main>
     </div>
   );
+}
+
+export default function MenuPage() {
+  return <MenuContent />;
 }
