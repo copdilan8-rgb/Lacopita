@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
+
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import supabase from "@/utils/supabase/client";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";

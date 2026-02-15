@@ -1,13 +1,14 @@
 "use client";
+
+// ✅ Indicar que esta página es dinámica
+export const dynamic = 'force-dynamic';
+
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import { ClipboardList, AlertCircle } from "lucide-react";
 import { verificarCajaOptimizado } from "@/utils/cajaCache";
-
-// ✅ Indicar que esta página es dinámica
-export const dynamic = 'force-dynamic';
 
 /**
  * 🧃 Mapa de categorías -> {label, emoji, path}
