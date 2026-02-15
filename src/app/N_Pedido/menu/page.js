@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ClipboardList, AlertCircle } from "lucide-react";
 import { verificarCajaOptimizado } from "@/utils/cajaCache";
 
+// ✅ Indicar que esta página es dinámica
+export const dynamic = 'force-dynamic';
+
 /**
  * 🧃 Mapa de categorías -> {label, emoji, path}
  */

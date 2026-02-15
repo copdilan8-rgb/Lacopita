@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/NavBar";
+
+// ✅ Indicar que esta página es dinámica
+export const dynamic = 'force-dynamic';
 import { Button } from "@/components/ui/button";
 import { Trash2, ArrowLeft } from "lucide-react";
 import supabase from "@/utils/supabase/client";
