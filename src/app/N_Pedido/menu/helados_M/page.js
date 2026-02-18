@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import supabase from "@/utils/supabase/client";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
@@ -13,13 +13,20 @@ import { NotificationContainer } from "@/components/NotificationContainer";
 
 export default function HeladosMenuPage() {
   const router = useRouter();
-  const params = useSearchParams();
-  const mesaParam = params.get("mesa");
+  const [mesaParam, setMesaParam] = useState(null);
   const { notificaciones, showNotification } = useNotification();
 
   const [helados, setHelados] = useState([]);
   const [sabores, setSabores] = useState([]);
   const [cantidades, setCantidades] = useState({});
+
+  /* 📍 Obtener parámetro mesa de la URL */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const mesa = params.get("mesa");
+    setMesaParam(mesa);
+  }, []);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [heladoSeleccionado, setHeladoSeleccionado] = useState(null);

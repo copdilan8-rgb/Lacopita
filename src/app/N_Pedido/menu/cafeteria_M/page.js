@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import supabase from "@/utils/supabase/client";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
@@ -20,10 +20,17 @@ export default function CafeteriaMenuPage() {
   const [productos, setProductos] = useState([]);
   const [cantidades, setCantidades] = useState({});
   const [notificaciones, setNotificaciones] = useState([]);
+  const [mesaParam, setMesaParam] = useState(null);
 
-  const params = useSearchParams();
   const router = useRouter();
-  const mesaParam = params.get("mesa");
+
+  /* 📍 Obtener parámetro mesa de la URL */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const mesa = params.get("mesa");
+    setMesaParam(mesa);
+  }, []);
 
   // 🔔 Notificaciones
   const showNotification = (mensaje, tipo = "success") => {

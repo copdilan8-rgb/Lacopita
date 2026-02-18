@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import { ClipboardList, AlertCircle } from "lucide-react";
@@ -26,12 +26,19 @@ const CATEGORIES = [
 
 function MenuContent() {
   const router = useRouter();
-  const params = useSearchParams();
-  const mesaParam = params.get("mesa");
+  const [mesaParam, setMesaParam] = useState(null);
   const [cajaAbierta, setCajaAbierta] = useState(null);
   const [cargando, setCargando] = useState(true);
   const pollingRef = useRef(null);
   const broadcastChannelRef = useRef(null);
+
+  /* 📍 Obtener parámetro mesa de la URL */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const mesa = params.get("mesa");
+    setMesaParam(mesa);
+  }, []);
 
   useEffect(() => {
     // Verificar caja abierta (usa caché optimizado)
