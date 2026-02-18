@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import { Trash2, ArrowLeft } from "lucide-react";
@@ -17,14 +17,21 @@ function DetallePedidoContent() {
   });
   const [usuarioId, setUsuarioId] = useState(null);
   const [isClient, setIsClient] = useState(false);
+  const [mesaParam, setMesaParam] = useState(null);
 
   const router = useRouter();
-  const params = useSearchParams();
-  const mesaParam = params.get("mesa");
 
   /* ✅ Verificar que estamos en el cliente */
   useEffect(() => {
     setIsClient(true);
+  }, []);
+
+  /* 📍 Obtener parámetro mesa de la URL */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const mesa = params.get("mesa");
+    setMesaParam(mesa);
   }, []);
 
   /* 🔐 Obtener ID del usuario logueado */
